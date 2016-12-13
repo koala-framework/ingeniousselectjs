@@ -1,0 +1,23 @@
+{
+  "name": "ingeniousselectjs",
+  "homepage": "https://github.com/koala-framework/ingeniousselectjs",
+  "authors": [
+    "Michael Tiefenthaler <mt@vivid-planet.com>"
+  ],
+  "description": "styleable html select",
+  "main": "ingeniousselect.js",
+  "keywords": [
+    "select"
+  ],
+  "license": "BSD-2-Clause",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.x"
+  }
+}

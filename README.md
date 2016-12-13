@@ -1,4 +1,4 @@
-# ingeniousselectjs
+# IngeniousSelectjs
 
 Ingeniousselect is a small jQuery plugin. It makes one or more select elements styleable.
 
@@ -15,5 +15,5 @@ $('.mySelect').ingeniousselect({
 });
 ```
 ### Supports
-Desktop: IE9+, Edge, actual Chrome, Firefox and Safari
+Desktop: IE9+, Edge, actual Chrome, Firefox and Safari&nbsp;
 Mobile: Android Browser 5.0, Chrome Mobile, Mobile Safari 7.0+

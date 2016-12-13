@@ -1,15 +1,13 @@
-/** hide IEs default arrow **/
-select::-ms-expand {
-    display: none;
-}
-
 /** Wrapper über Select **/
 .ingeniousSelect-selectWrapper {
     position: relative;
     top: 0px;
     left: 0px;
 }
-
+/** hide IEs default arrow **/
+.ingeniousSelect-selectWrapper select::-ms-expand {
+    display: none;
+}
 /** Original Select **/
 .ingeniousSelect-select {
     width: 100%;

@@ -15,5 +15,5 @@ $('.mySelect').ingeniousselect({
 });
 ```
 ### Supports
-Desktop: IE9+, Edge, actual Chrome, Firefox and Safari&nbsp;
+Desktop: IE9+, Edge, actual Chrome, Firefox and Safari <br>
 Mobile: Android Browser 5.0, Chrome Mobile, Mobile Safari 7.0+

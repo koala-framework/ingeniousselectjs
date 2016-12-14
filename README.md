@@ -1,6 +1,6 @@
 # IngeniousSelectjs
 
-Ingeniousselect is a small jQuery plugin. It makes one or more select elements styleable.
+Ingeniousselect is a small jQuery plugin, that makes one or more select elements styleable. It could be used as an alternativ for selectric. The problem with selectric is that you don't get a change-event if the value of the original select is set with vanilla-javacript or if the optionslist changes on the fly. Ingeniousselect doesn't have these problems, because it uses the original selectfield. The options are copied to a separate div-structure that will update on every click on the select.
 
 ## Usage
 ```javascript

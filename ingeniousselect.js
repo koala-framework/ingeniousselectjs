@@ -88,13 +88,11 @@
                 var $optionsWrapper = $(select).parent().find('.'+settings.prefix+'optionsWrapper');
                 if ($optionsWrapper.hasClass(settings.prefix+'optionsWrapper--visible')) {
                     hideSelect($(select));
+                    $(select).val($(e.target).data('value'));
+                    $(select).trigger('change');
                 } else {
                     hideSelect($(select));
                     showSelect($(select));
-                }
-                //Selectwert setzen
-                if ($(e.target).data('value')) {
-                    $(select).val($(e.target).data('value'));
                 }
             });
         });

@@ -8,6 +8,7 @@
     }
 }(this, function ($) {
     var initialized = false;
+    var scrollBarOffset = 20; //20px für Scrollbar mit einrechnen
 
     $.fn.ingeniousselect = function(settings) {
         if (typeof settings == 'object' && settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
@@ -24,37 +25,45 @@
             var optionsWrapper = $select.parent().find('.'+settings.prefix+'optionsWrapper');
             var selectOffset = $select.offset();
 
-            if (selectOffset.top <= $(window).height()/2) {
-                optionsWrapper.addClass(settings.prefix+'optionsWrapper--bottom');
-            } else {
+            if ((selectOffset.top + optionsWrapper.height() + $select.height() + scrollBarOffset - window.scrollY) > $(window).height() &&
+                (selectOffset.top - window.scrollY) > $(window).height()/2) {
+                optionsWrapper.removeClass(settings.prefix+'optionsWrapper--bottom');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--top');
+            } else {
+                optionsWrapper.removeClass(settings.prefix+'optionsWrapper--top');
+                optionsWrapper.addClass(settings.prefix+'optionsWrapper--bottom');
             }
             //links oder rechtsbündig mit select
             if (selectOffset.left <= $(window).width()/2) {
+                optionsWrapper.removeClass(settings.prefix+'optionsWrapper--rightAlign');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--leftAlign');
             } else {
+                optionsWrapper.removeClass(settings.prefix+'optionsWrapper--leftAlign');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--rightAlign');
             }
-        }
+        };
 
         var showSelect = function($select) {
+            var selectWrapper = $select.parent();
             var optionsWrapper = $select.parent().find('.'+settings.prefix+'optionsWrapper');
             var overlay = $select.parent().find('.'+settings.prefix+'selectOverlay');
 
             //checken ob optionen unten kollidieren
             optionsWrapper.css('max-height', '');
-            if ( (optionsWrapper.height() + optionsWrapper.offset().top) > $(window).height() ) {
-                optionsWrapper.css('max-height', ($(window).height() - optionsWrapper.offset().top - overlay.height() - 10)+'px');
+            if ( optionsWrapper.hasClass(settings.prefix+'optionsWrapper--bottom') &&
+                (optionsWrapper.height() + selectWrapper.offset().top + overlay.height() - window.scrollY) > $(window).height() ) {
+                var maxHeight = $(window).height() - (selectWrapper.offset().top - window.scrollY + overlay.height()) - scrollBarOffset;
+                optionsWrapper.css('max-height', maxHeight+'px');
             }
             optionsWrapper.addClass(settings.prefix+'optionsWrapper--visible');
             optionsWrapper.slideDown(300);
-        }
+        };
 
         var hideSelect = function() {
             $('.'+settings.prefix+'optionsWrapper--visible')
                 .removeClass(settings.prefix+'optionsWrapper--visible')
                 .slideUp(300);
-        }
+        };
 
         var setOptionsForWrapper = function($select) {
             var optionsWrapper = $select.parent().find('.'+settings.prefix+'optionsWrapper');
@@ -71,7 +80,7 @@
                     'data-value="'+$element.attr('value')+'">'+$element.text()+'</div>');
                 }
             });
-        }
+        };
 
         this.each(function(index, select) {
             //Select holen und Div-Struktur entsprechend anpassen

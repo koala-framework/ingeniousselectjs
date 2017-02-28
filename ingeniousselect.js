@@ -57,12 +57,14 @@
             }
             optionsWrapper.addClass(settings.prefix+'optionsWrapper--visible');
             optionsWrapper.slideDown(300);
+            selectWrapper.addClass(settings.prefix+'selectWrapper--open');
         };
 
         var hideSelect = function() {
             $('.'+settings.prefix+'optionsWrapper--visible')
                 .removeClass(settings.prefix+'optionsWrapper--visible')
                 .slideUp(300);
+            $('.'+settings.prefix+'selectWrapper--open').removeClass(settings.prefix+'selectWrapper--open');
         };
 
         var setOptionsForWrapper = function($select) {

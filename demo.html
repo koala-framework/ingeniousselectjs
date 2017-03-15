@@ -26,6 +26,42 @@
             .ingeniousSelect-select {
                 border-radius: 4px;
             }
+            /** hide IEs default arrow **/
+            .ingeniousSelect-selectWrapper select::-ms-expand {
+                display: none;
+            }
+            /** Original Select **/
+            .ingeniousSelect-select {
+                background-color: white;
+                color: black;
+                border: 1px solid black;
+                padding: 10px 30px 10px 10px;
+                -webkit-appearance:none;
+                -moz-appearance:none;
+            }
+            /** Klickbare Fläche über original Select **/
+            .ingeniousSelect-selectOverlay:after {
+                position: absolute;
+                right: 10px;
+                top: 12px;
+                content: '';
+                background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iNTAiIHdpZHRoPSI1MCIvPjxwb2x5Z29uIHBvaW50cz0iNDcuMjUsMTUgNDUuMTY0LDEyLjkxNCAyNSwzMy4wNzggNC44MzYsMTIuOTE0IDIuNzUsMTUgMjUsMzcuMjUgIi8+PC9zdmc+');
+                background-size: cover;
+                width: 16px;
+                height: 16px;
+            }
+            /** Eigene Select Optionen **/
+            .ingeniousSelect-optionsWrapper {
+                border: 1px solid black;
+            }
+            .ingeniousSelect-optionsWrapper__option {
+                background: #fff;
+                padding: 10px;
+            }
+            .ingeniousSelect-optionsWrapper__option:hover,
+            .ingeniousSelect-optionsWrapper__option--selected {
+                background: #dfdfdf;
+            }
         </style>
     </head>
     <body>

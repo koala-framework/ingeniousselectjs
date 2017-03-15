@@ -5,7 +5,10 @@
     "Michael Tiefenthaler <mt@vivid-planet.com>"
   ],
   "description": "styleable html select",
-  "main": "ingeniousselect.js",
+  "main": [
+    "ingeniousselect.js",
+    "ingeniousselect.css"
+  ],
   "keywords": [
     "select"
   ],

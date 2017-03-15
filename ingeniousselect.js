@@ -113,8 +113,6 @@
         //Initial Css laden und Clickhandler zum schließen der Selects bei Klick auf KEIN Select
         if (!initialized) {
             initialized = true;
-            $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'ingeniousselect.css') );
-
             $(window).on('click', function(e) {
                 if (!$(e.target).closest('.'+settings.prefix+'selectWrapper').length) {
                     hideSelect();

@@ -9,6 +9,13 @@
 }(this, function ($) {
     var initialized = false;
     var scrollBarOffset = 20; //20px für Scrollbar mit einrechnen
+    var styles = {
+        select: 'width:100%;z-index:0;',
+        selectWrapper: 'position: relative',
+        selectOverlay: 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;',
+        optionsWrapper: 'display:none;position:absolute;overflow:auto;z-index:2;',
+        optionsWrapperOption: 'white-space:nowrap;cursor:pointer;'
+    };
 
     $.fn.ingeniousselect = function(settings) {
         if (typeof settings == 'object' && settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
@@ -29,17 +36,25 @@
                 (selectOffset.top - window.scrollY) > $(window).height()/2) {
                 optionsWrapper.removeClass(settings.prefix+'optionsWrapper--bottom');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--top');
+                $(optionsWrapper).css('bottom', '100%');
+                $(optionsWrapper).css('top', 'auto');
             } else {
                 optionsWrapper.removeClass(settings.prefix+'optionsWrapper--top');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--bottom');
+                $(optionsWrapper).css('top', '100%');
+                $(optionsWrapper).css('bottom', 'auto');
             }
             //links oder rechtsbündig mit select
             if (selectOffset.left <= $(window).width()/2) {
                 optionsWrapper.removeClass(settings.prefix+'optionsWrapper--rightAlign');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--leftAlign');
+                $(optionsWrapper).css('left', '0');
+                $(optionsWrapper).css('right', 'auto');
             } else {
                 optionsWrapper.removeClass(settings.prefix+'optionsWrapper--leftAlign');
                 optionsWrapper.addClass(settings.prefix+'optionsWrapper--rightAlign');
+                $(optionsWrapper).css('right', '0');
+                $(optionsWrapper).css('left', 'auto');
             }
         };
 
@@ -76,20 +91,23 @@
                 $element = $(element);
                 if ($element.attr('value') == $select.val()) {
                     optionsWrapper.append('<div class="'+settings.prefix+'optionsWrapper__option '+
-                    settings.prefix+'optionsWrapper__option--selected" data-value="'+$element.attr('value')+'">'+$element.text()+'</div>');
+                    settings.prefix+'optionsWrapper__option--selected" data-value="'+$element.attr('value')+
+                        '" style="'+styles.optionsWrapperOption+'">'+$element.text()+'</div>');
                 } else {
                     optionsWrapper.append('<div class="'+settings.prefix+'optionsWrapper__option" '+
-                    'data-value="'+$element.attr('value')+'">'+$element.text()+'</div>');
+                        'data-value="'+$element.attr('value')+'" style="'+styles.optionsWrapperOption+
+                        '">'+$element.text()+'</div>');
                 }
             });
         };
 
         this.each(function(index, select) {
             //Select holen und Div-Struktur entsprechend anpassen
+            select.style = styles.select;
             $(select).addClass(settings.prefix+'select');
-            $(select).wrap('<div class="'+settings.prefix+'selectWrapper"></div>');
-            $(select).parent().append('<div class="'+settings.prefix+'selectOverlay">'+
-            '</div><div class="'+settings.prefix+'optionsWrapper"></div>');
+            $(select).wrap('<div class="'+settings.prefix+'selectWrapper" style="'+styles.selectWrapper+'"></div>');
+            $(select).parent().append('<div class="'+settings.prefix+'selectOverlay" style="'+styles.selectOverlay+'">'+
+            '</div><div class="'+settings.prefix+'optionsWrapper" style="'+styles.optionsWrapper+'"></div>');
 
             $(select).parent().on('click', function(e) {
                 setOptionsForWrapper($(select));

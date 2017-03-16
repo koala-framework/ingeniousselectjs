@@ -6,8 +6,7 @@
   ],
   "description": "styleable html select",
   "main": [
-    "ingeniousselect.js",
-    "ingeniousselect.css"
+    "ingeniousselect.js"
   ],
   "keywords": [
     "select"

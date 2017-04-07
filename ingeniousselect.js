@@ -69,6 +69,10 @@
                 (optionsWrapper.height() + selectWrapper.offset().top + overlay.height() - window.scrollY) > $(window).height() ) {
                 var maxHeight = $(window).height() - (selectWrapper.offset().top - window.scrollY + overlay.height()) - scrollBarOffset;
                 optionsWrapper.css('max-height', maxHeight+'px');
+            } else if ( optionsWrapper.hasClass(settings.prefix+'optionsWrapper--top') &&
+                (selectWrapper.offset().top  - optionsWrapper.height()) < $(window).height() ) {
+                var maxHeight = selectWrapper.offset().top - window.scrollY;
+                optionsWrapper.css('max-height', maxHeight+'px');
             }
             optionsWrapper.addClass(settings.prefix+'optionsWrapper--visible');
             optionsWrapper.slideDown(300);

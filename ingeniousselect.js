@@ -121,7 +121,9 @@
                 var $optionsWrapper = $(select).parent().find('.'+settings.prefix+'optionsWrapper');
                 if ($optionsWrapper.hasClass(settings.prefix+'optionsWrapper--visible')) {
                     hideSelect($(select));
-                    if ($(e.target).data('value') && $(e.target).data('value') != $(select).val()) {
+                    if ($(e.target).hasClass(settings.prefix+'optionsWrapper__option')
+                        && $(e.target).data('value') != $(select).val()
+                    ) {
                         $(select).val($(e.target).data('value'));
                         $(select).trigger('change');
                     }

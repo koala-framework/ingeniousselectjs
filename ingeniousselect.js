@@ -9,6 +9,9 @@
 }(this, function ($) {
     var initialized = false;
     var scrollBarOffset = 20; //20px für Scrollbar mit einrechnen
+    var resizePuffer = 100; //Timeout in ms
+    var resized = false;
+    var resizeTimeout;
     var styles = {
         select: 'width:100%;z-index:0;',
         selectWrapper: 'position: relative',
@@ -24,7 +27,8 @@
             settings = {};
         }
         settings = $.extend({
-            prefix: 'ingeniousSelect-'
+            prefix: 'ingeniousSelect-',
+            minDeviceWidth: 768
         }, settings);
 
         var setOptionsWrapperPosition = function($select) {
@@ -105,15 +109,63 @@
             });
         };
 
-        this.each(function(index, select) {
-            //Select holen und Div-Struktur entsprechend anpassen
-            select.style = styles.select;
-            $(select).addClass(settings.prefix+'select');
-            $(select).wrap('<div class="'+settings.prefix+'selectWrapper" style="'+styles.selectWrapper+'"></div>');
-            $(select).parent().append('<div class="'+settings.prefix+'selectOverlay" style="'+styles.selectOverlay+'">'+
-            '</div><div class="'+settings.prefix+'optionsWrapper" style="'+styles.optionsWrapper+'"></div>');
+        var useNativeSelect = function(selects) {
+            if (!$(selects[0]).parent().data('hasClickEvent')) {
+                return;
+            } else {
+                $(selects[0]).parent().data('hasClickEvent', false);
+            }
 
-            $(select).parent().on('click', function(e) {
+            selects.each(function(index, select) {
+                $(select).parent().off('click.ingeniousselect');
+                var selectWrapper = $(select).parent();
+
+                if (!selectWrapper.hasClass(settings.prefix+'selectWrapper--useNative')) {
+                    selectWrapper.addClass(settings.prefix+'selectWrapper--useNative');
+                    selectWrapper.find('.'+settings.prefix+'selectOverlay').css('z-index', '-1');
+                }
+            });
+        };
+
+        var useIngeniousSelect = function(selects) {
+            if ($(selects[0]).parent().data('hasClickEvent')) {
+                return;
+            } else {
+                $(selects[0]).parent().data('hasClickEvent', true);
+            }
+
+
+            selects.each(function(index, select) {
+                addClickHandler(select);
+                var selectWrapper = $(select).parent();
+
+                if (selectWrapper.hasClass(settings.prefix+'selectWrapper--useNative')) {
+                    selectWrapper.removeClass(settings.prefix+'selectWrapper--useNative');
+                    selectWrapper.find('.'+settings.prefix+'selectOverlay').css('z-index', '1');
+                }
+            });
+        };
+
+        var onResize = (function() {
+            if (!resized) {
+                resized = true;
+                resizeTimeout = setTimeout((function () {
+                    clearTimeout(resizeTimeout);
+
+                    if ($(window).width() < settings.minDeviceWidth) {
+                        useNativeSelect(this);
+                    } else {
+                        useIngeniousSelect(this);
+                    }
+                    resized = false;
+                }).bind(this), resizePuffer);
+            }
+        }).bind(this);
+
+        var addClickHandler = function(select) {
+            $(select).parent().data('hasClickEvent', true);
+
+            $(select).parent().on('click.ingeniousselect', function(e) {
                 setOptionsForWrapper($(select));
                 setOptionsWrapperPosition($(select));
 
@@ -126,11 +178,25 @@
                         $(select).trigger('change');
                     }
                 } else {
-                    hideSelect($(select));
                     showSelect($(select));
                 }
             });
+        };
+
+        this.each(function(index, select) {
+            //Select holen und Div-Struktur entsprechend anpassen
+            select.style = styles.select;
+            $(select).addClass(settings.prefix+'select');
+            $(select).wrap('<div class="'+settings.prefix+'selectWrapper" style="'+styles.selectWrapper+'"></div>');
+            $(select).parent().append('<div class="'+settings.prefix+'selectOverlay" style="'+styles.selectOverlay+'">'+
+            '</div><div class="'+settings.prefix+'optionsWrapper" style="'+styles.optionsWrapper+'"></div>');
         });
+
+
+        $(window).resize((function() {
+            onResize();
+        }).bind(this));
+        onResize();
 
         //Initial Css laden und Clickhandler zum schließen der Selects bei Klick auf KEIN Select
         if (!initialized) {

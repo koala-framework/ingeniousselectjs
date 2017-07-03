@@ -90,28 +90,43 @@
             $('.'+settings.prefix+'selectWrapper--open').removeClass(settings.prefix+'selectWrapper--open');
         };
 
-        var setOptionsForWrapper = function($select) {
+        var setOptionsAndGroupsForWrapper = function($select) {
             var optionsWrapper = $select.parent().find('.'+settings.prefix+'optionsWrapper');
 
-            //Optionen neu vom Select holen und in den wrapper schieben
+            //Optionen bzw Gruppen neu vom Select holen und in den wrapper schieben
             optionsWrapper.html('');
-            $select.find('option').each(function(index, element) {
-                $element = $(element);
-                if ($element.attr('value') == $select.val()) {
-                    $( "<div/>", {
-                        class: settings.prefix + 'optionsWrapper__option ' + settings.prefix+'optionsWrapper__option--selected',
-                        text: $element.text(),
-                        'data-value': $element.attr('value'),
-                        style: styles.optionsWrapperOption
-                    }).appendTo( optionsWrapper );
-                } else {
-                    $( "<div/>", {
-                        class: settings.prefix + 'optionsWrapper__option',
-                        text: $element.text(),
-                        'data-value': $element.attr('value'),
-                        style: styles.optionsWrapperOption
-                    }).appendTo( optionsWrapper );
+
+            if ($select.find('optgroup').length) {
+                $select.find('optgroup').each(function(index, optgroup) {
+                    var optionGroup = $( "<div/>", {
+                        class: settings.prefix + 'optionsWrapper__group'
+                    });
+                    var optionGroupText = $( "<div/>", {
+                        class: settings.prefix + 'optionsWrapper__group__text',
+                        text: optgroup.label
+                    });
+                    optionGroupText.appendTo( optionGroup.appendTo( optionsWrapper ) );
+                    setOptions($select, $(optgroup), optionGroup);
+                });
+            } else {
+                setOptions($select, $select, optionsWrapper);
+            }
+        };
+
+        var setOptions = function($select, $parent, addToNode) {
+            $parent.find('option').each(function(index, element) {
+                var $element = $(element);
+                var className = [settings.prefix + 'optionsWrapper__option'];
+                if ($element.attr('value') === $select.val()) {
+                    className.push(settings.prefix+'optionsWrapper__option--selected');
                 }
+
+                $( "<div/>", {
+                    class: className.join(' '),
+                    text: $element.text(),
+                    'data-value': $element.attr('value'),
+                    style: styles.optionsWrapperOption
+                }).appendTo( addToNode );
             });
         };
 
@@ -172,7 +187,7 @@
             $(select).parent().data('hasClickEvent', true);
 
             $(select).parent().on('click.ingeniousselect', function(e) {
-                setOptionsForWrapper($(select));
+                setOptionsAndGroupsForWrapper($(select));
                 setOptionsWrapperPosition($(select));
 
                 //Optionen sichtbar/unsichtbar schalten
@@ -184,6 +199,7 @@
                         $(select).trigger('change');
                     }
                 } else {
+                    hideSelect($(select));
                     showSelect($(select));
                 }
             });

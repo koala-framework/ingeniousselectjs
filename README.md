@@ -8,10 +8,17 @@ $('.mySelect').ingeniousselect();
 ```
 ## Options
 
-You can optional set your own class-prefix. But keep in mind that you have to copy the content of ingeniousselect.css and rewrite the styles with your prefix.
+Set your own class-prefix:
 ```javascript
 $('.mySelect').ingeniousselect({
   prefix: 'yourPrefix'
+});
+```
+
+Set a minWidth, up to this width native selectoptions will be used. Default is 768px. If you don't want to use native selectoptions, then set it to 0.
+```javascript
+$('.mySelect').ingeniousselect({
+  minDeviceWidth: 768
 });
 ```
 ### Supports

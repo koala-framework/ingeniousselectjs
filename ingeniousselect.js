@@ -98,13 +98,19 @@
             $select.find('option').each(function(index, element) {
                 $element = $(element);
                 if ($element.attr('value') == $select.val()) {
-                    optionsWrapper.append('<div class="'+settings.prefix+'optionsWrapper__option '+
-                    settings.prefix+'optionsWrapper__option--selected" data-value="'+$element.attr('value')+
-                        '" style="'+styles.optionsWrapperOption+'">'+$element.text()+'</div>');
+                    $( "<div/>", {
+                        class: settings.prefix + 'optionsWrapper__option ' + settings.prefix+'optionsWrapper__option--selected',
+                        text: $element.text(),
+                        'data-value': $element.attr('value'),
+                        style: styles.optionsWrapperOption
+                    }).appendTo( optionsWrapper );
                 } else {
-                    optionsWrapper.append('<div class="'+settings.prefix+'optionsWrapper__option" '+
-                        'data-value="'+$element.attr('value')+'" style="'+styles.optionsWrapperOption+
-                        '">'+$element.text()+'</div>');
+                    $( "<div/>", {
+                        class: settings.prefix + 'optionsWrapper__option',
+                        text: $element.text(),
+                        'data-value': $element.attr('value'),
+                        style: styles.optionsWrapperOption
+                    }).appendTo( optionsWrapper );
                 }
             });
         };

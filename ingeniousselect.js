@@ -99,7 +99,7 @@
             if ($select.find('optgroup').length) {
                 $select.find('optgroup').each(function(index, optgroup) {
                     var optionGroup = $( "<div/>", {
-                        class: settings.prefix + 'optionsWrapper__group'
+                        class: settings.prefix + 'optionsWrapper__group ' + optgroup.className
                     });
                     var optionGroupText = $( "<div/>", {
                         class: settings.prefix + 'optionsWrapper__group__text',
@@ -116,7 +116,7 @@
         var setOptions = function($select, $parent, addToNode) {
             $parent.find('option').each(function(index, element) {
                 var $element = $(element);
-                var className = [settings.prefix + 'optionsWrapper__option'];
+                var className = [settings.prefix + 'optionsWrapper__option' + ' ' + element.className];
                 if ($element.attr('value') === $select.val()) {
                     className.push(settings.prefix+'optionsWrapper__option--selected');
                 }

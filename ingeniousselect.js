@@ -120,6 +120,9 @@
                 if ($element.attr('value') === $select.val()) {
                     className.push(settings.prefix+'optionsWrapper__option--selected');
                 }
+                if ($element.attr('disabled')) {
+                    className.push(settings.prefix + 'optionsWrapper__option--disabled');
+                }
 
                 $( "<div/>", {
                     class: className.join(' '),

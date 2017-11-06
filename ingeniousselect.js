@@ -209,12 +209,17 @@
         };
 
         this.each(function(index, select) {
-            //Select holen und Div-Struktur entsprechend anpassen
-            select.style = styles.select;
-            $(select).addClass(settings.prefix+'select');
-            $(select).wrap('<div class="'+settings.prefix+'selectWrapper" style="'+styles.selectWrapper+'"></div>');
-            $(select).parent().append('<div class="'+settings.prefix+'selectOverlay" style="'+styles.selectOverlay+'">'+
-            '</div><div class="'+settings.prefix+'optionsWrapper" style="'+styles.optionsWrapper+'"></div>');
+            if (!$(select).data('ingenousselect-initialized')) {
+                //Select holen und Div-Struktur entsprechend anpassen
+                select.style = styles.select;
+                $(select).addClass(settings.prefix+'select');
+                $(select).wrap('<div class="'+settings.prefix+'selectWrapper" style="'+styles.selectWrapper+'"></div>');
+                $(select).parent().append('<div class="'+settings.prefix+'selectOverlay" style="'+styles.selectOverlay+'">'+
+                    '</div><div class="'+settings.prefix+'optionsWrapper" style="'+styles.optionsWrapper+'"></div>');
+                $(select).data('ingenousselect-initialized', true);
+            } else {
+                console.warn('This selectelement ist already initialized. Every selectelement can only be initialized once.', select);
+            }
         });
 
 

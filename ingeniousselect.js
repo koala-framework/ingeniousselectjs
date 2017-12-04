@@ -10,8 +10,6 @@
     var initialized = false;
     var scrollBarOffset = 20; //20px für Scrollbar mit einrechnen
     var resizePuffer = 100; //Timeout in ms
-    var resized = false;
-    var resizeTimeout;
     var styles = {
         select: 'width:100%;z-index:0;',
         selectWrapper: 'position: relative',
@@ -21,6 +19,9 @@
     };
 
     $.fn.ingeniousselect = function(settings) {
+        var resized = false;
+        var resizeTimeout;
+        
         if (typeof settings == 'object' && settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
             settings.prefix = settings.prefix+'-';
         } else {

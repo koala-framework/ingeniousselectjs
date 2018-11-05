@@ -21,12 +21,13 @@
     $.fn.ingeniousselect = function(settings) {
         var resized = false;
         var resizeTimeout;
-        
-        if (typeof settings == 'object' && settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
-            settings.prefix = settings.prefix+'-';
-        } else {
+
+        if (typeof settings !== 'object') {
             settings = {};
+        } else if (settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
+            settings.prefix = settings.prefix+'-';
         }
+        
         settings = $.extend({
             prefix: 'ingeniousSelect-',
             minDeviceWidth: 768

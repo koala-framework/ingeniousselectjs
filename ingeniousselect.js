@@ -192,6 +192,7 @@
             $(select).parent().data('hasClickEvent', true);
 
             $(select).parent().on('click.ingeniousselect', function(e) {
+                if (select.disabled) return false;
                 setOptionsAndGroupsForWrapper($(select));
                 setOptionsWrapperPosition($(select));
 

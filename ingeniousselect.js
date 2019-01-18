@@ -131,9 +131,7 @@
         };
 
         var useNativeSelect = function(selects) {
-            if (!$(selects[0]).parent().data('hasClickEvent')) {
-                return;
-            } else {
+            if ($(selects[0]).parent().data('hasClickEvent')) {
                 $(selects[0]).parent().data('hasClickEvent', false);
             }
 

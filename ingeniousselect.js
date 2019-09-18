@@ -27,7 +27,7 @@
         } else if (settings.prefix && settings.prefix.indexOf('-') != (settings.prefix.length - 1)) {
             settings.prefix = settings.prefix+'-';
         }
-        
+
         settings = $.extend({
             prefix: 'ingeniousSelect-',
             minDeviceWidth: 768
@@ -136,7 +136,9 @@
         };
 
         var useNativeSelect = function(selects) {
-            if ($(selects[0]).parent().data('hasClickEvent')) {
+            if ($(selects[0]).parent().data('hasClickEvent') === false) {
+                return;
+            } else {
                 $(selects[0]).parent().data('hasClickEvent', false);
             }
 
@@ -152,7 +154,7 @@
         };
 
         var useIngeniousSelect = function(selects) {
-            if ($(selects[0]).parent().data('hasClickEvent')) {
+            if ($(selects[0]).parent().data('hasClickEvent') === true) {
                 return;
             } else {
                 $(selects[0]).parent().data('hasClickEvent', true);

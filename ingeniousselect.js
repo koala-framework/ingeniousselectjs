@@ -227,7 +227,6 @@
             }
         });
 
-
         $(window).resize((function() {
             onResize();
         }).bind(this));
@@ -237,7 +236,10 @@
         if (!initialized) {
             initialized = true;
             $(window).on('click', function(e) {
-                if (!$(e.target).closest('.'+settings.prefix+'selectWrapper').length) {
+                var closestSelect = $(e.target).closest('.' + settings.prefix + 'selectWrapper');
+                var targetSelectId = e.target.getAttribute('for');
+
+                if (!closestSelect.length && !targetSelectId) {
                     hideSelect();
                 }
             });

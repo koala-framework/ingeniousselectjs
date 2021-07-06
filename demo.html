@@ -1,85 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- jsFiddle - https://jsfiddle.net/ohqffLez/2/-->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>ingeniousselectjs</title>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-        <script src="ingeniousselect.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('select').ingeniousselect();
-                $('select').ingeniousselect();
-            });
-        </script>
-        <style media="screen">
-            .ingeniousSelect-selectWrapper {
-                width: 200px;
-            }
-            .ingeniousSelect-selectWrapper:nth-child(2) {
-                margin-left: 70vw;
-            }
-            .ingeniousSelect-selectWrapper:nth-child(3) {
-                margin-top: 70vh;
-                margin-left: 70vw;
-            }
-            .ingeniousSelect-select {
-                border-radius: 4px;
-            }
-            /** hide IEs default arrow **/
-            .ingeniousSelect-selectWrapper select::-ms-expand {
-                display: none;
-            }
-            /** Original Select **/
-            .ingeniousSelect-select {
-                background-color: white;
-                color: black;
-                border: 1px solid black;
-                padding: 10px 30px 10px 10px;
-                -webkit-appearance:none;
-                -moz-appearance:none;
-            }
-            /** Klickbare Fläche über original Select **/
-            .ingeniousSelect-selectOverlay:after {
-                position: absolute;
-                right: 10px;
-                top: 12px;
-                content: '';
-                background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iNTAiIHdpZHRoPSI1MCIvPjxwb2x5Z29uIHBvaW50cz0iNDcuMjUsMTUgNDUuMTY0LDEyLjkxNCAyNSwzMy4wNzggNC44MzYsMTIuOTE0IDIuNzUsMTUgMjUsMzcuMjUgIi8+PC9zdmc+');
-                background-size: cover;
-                width: 16px;
-                height: 16px;
-            }
-            /** Eigene Select Optionen **/
-            .ingeniousSelect-optionsWrapper {
-                border: 1px solid black;
-            }
-            .ingeniousSelect-optionsWrapper__group__text {
-                background: #fff;
-                padding: 5px;
-                font-weight: bold;
-            }
-            .ingeniousSelect-optionsWrapper__option {
-                background: #fff;
-                padding: 10px;
-                font-weight: normal;
-            }
-            .ingeniousSelect-optionsWrapper__option:hover,
-            .ingeniousSelect-optionsWrapper__option--selected {
-                background: #dfdfdf;
-            }
-        </style>
-    </head>
-    <body>
-        <select name="select1" class="select1">
+<head>
+    <!-- jsFiddle - https://jsfiddle.net/ohqffLez/2/-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ingeniousselectjs</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="ingeniousselect.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').ingeniousselect();
+        });
+    </script>
+    <style media="screen">
+        .ingeniousSelect-selectWrapper {
+            width: 200px;
+            margin-bottom: 50px;
+        }
+        .ingeniousSelect-select {
+            border-radius: 4px;
+        }
+        /** hide IEs default arrow **/
+        .ingeniousSelect-selectWrapper select::-ms-expand {
+            display: none;
+        }
+        /** Original Select **/
+        .ingeniousSelect-select {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 10px 30px 10px 10px;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+        }
+        /** Klickbare Fläche über original Select **/
+        .ingeniousSelect-selectOverlay:after {
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            content: '';
+            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iNTAiIHdpZHRoPSI1MCIvPjxwb2x5Z29uIHBvaW50cz0iNDcuMjUsMTUgNDUuMTY0LDEyLjkxNCAyNSwzMy4wNzggNC44MzYsMTIuOTE0IDIuNzUsMTUgMjUsMzcuMjUgIi8+PC9zdmc+');
+            background-size: cover;
+            width: 16px;
+            height: 16px;
+        }
+        /** Eigene Select Optionen **/
+        .ingeniousSelect-optionsWrapper {
+            border: 1px solid black;
+        }
+        .ingeniousSelect-optionsWrapper__group__text {
+            background: #fff;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .ingeniousSelect-optionsWrapper__option {
+            background: #fff;
+            padding: 10px;
+            font-weight: normal;
+        }
+        .ingeniousSelect-optionsWrapper__option:hover,
+        .ingeniousSelect-optionsWrapper__option--selected {
+            background: #dfdfdf;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form>
+        <label for="select1">Select 1</label>
+        <select name="select1" class="select1" id="select1">
             <option class="first blue big" value="a">Lorem ipsum dolor sit amet</option>
             <option value="b">Lorem ipsum dolor sit amet, consetetur sadipscing elitr</option>
             <option value="c">Wert c</option>
             <option value="d">Wert d</option>
             <option class="last" value="i">Wert e</option>
         </select>
-        <select name="select2" class="select2">
+
+        <label for="select2">Select 2</label>
+        <select name="select2" class="select2" id="select2">
             <option value="a">Lorem ipsum dolor sit amet</option>
             <option value="b">Lorem ipsum dolor sit amet, consetetur sadipscing elitr</option>
             <option value="c">Wert c</option>
@@ -87,14 +85,17 @@
             <option value="i">Wert e</option>
         </select>
 
-        <select name="select3" class="select3">
+        <label for="select3">Select 3</label>
+        <select name="select3" class="select3" id="select3">
             <option value="a">Lorem ipsum dolor sit amet</option>
             <option value="b">Lorem ipsum dolor sit amet, consetetur sadipscing elitr</option>
             <option value="c" disabled="disabled">Wert c</option>
             <option value="d" disabled="disabled">Wert d</option>
             <option value="i">Wert e</option>
         </select>
-        <select name="select4" class="select4">
+
+        <label for="select4">Select with option-groups</label>
+        <select name="select4" class="select4" id="select4">
             <optgroup label="Swedish Cars" class="group green">
                 <option value="volvo" class="groupoption lightgreen">Volvo</option>
                 <option value="saab">Saab</option>
@@ -104,5 +105,7 @@
                 <option value="audi">Audi</option>
             </optgroup>
         </select>
-    </body>
+    </form>
+</div>
+</body>
 </html>
